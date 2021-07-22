@@ -1,8 +1,6 @@
 package ucf.assignments;
 
-import javafx.beans.property.StringProperty;
-
-import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class Item {
     //create variables to store attributes of an item
@@ -10,6 +8,7 @@ public class Item {
     private String name;
     private String id;
     private String value;
+    private ArrayList<String> idList = new ArrayList<>();
 
     //getter method for ID
     public String getId() {
@@ -21,17 +20,20 @@ public class Item {
         //use this.id = id to set id value for instance of this item
         //Set ERROR messages is length of string is not 10 OR
         // if the String does not contain exclusively characters and numbers
-        if (id.length() == 10){
+        if (id.length() == 10) {
             this.id = id;
         } else {
             this.id = "ERROR, Must be formatted XXXXXXXXXX";
         }
-        char idList[] = id.toCharArray();
-        for (int i = 0; i < idList.length; i++){
-            if (!Character.isLetterOrDigit(idList[i])){
+        char idCharList[] = id.toCharArray();
+        for (int i = 0; i < idCharList.length; i++) {
+            if (!Character.isLetterOrDigit(idCharList[i])) {
                 this.id = "ERROR, Must only contain Num/Char";
             }
         }
+        validateUniqueID(id);
+        idList.add(id);
+
     }
 
     //getter method for value
@@ -44,9 +46,12 @@ public class Item {
         //use this.value = value to set value for instance of this item
         //convert from String to BigDecimal type
         this.value = value;
+        if (value.equals("")){
+            this.value = "Blank";
+        }
         char valueList[] = value.toCharArray();
-        for (int i = 0; i < valueList.length; i++){
-            if (!Character.isDigit(valueList[i])){
+        for (int i = 0; i < valueList.length; i++) {
+            if (!Character.isDigit(valueList[i])) {
                 this.value = "NonNumeric";
             }
         }
@@ -61,10 +66,23 @@ public class Item {
     public void setName(String name) {
         //use this.name = name to set name value for instance of this item
         //Set ERROR message if name is not between 2 and 256 characters
-        if(name.length() >= 2 && name.length() <= 256){
+        if (name.length() >= 2 && name.length() <= 256) {
             this.name = name;
         } else {
             this.name = "ERROR, Length must be between 2-256 inclusive";
         }
+    }
+
+    public String validateUniqueID(String id) {
+        //use list of IDs to ensure they do not repeat
+        //if ID is listed more than once, ERROR
+        for (String str : idList) {
+            if (!str.equals(id)) {
+                this.id = id;
+            } else {
+                this.id = "ERROR Serial Number must be unique";
+            }
+        }
+        return this.id;
     }
 }

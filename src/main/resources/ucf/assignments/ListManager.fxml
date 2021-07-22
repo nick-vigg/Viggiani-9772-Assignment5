@@ -53,10 +53,10 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button mnemonicParsing="false" onAction="#addButtonIsClicked" text="Add" />
-                        <Button mnemonicParsing="false" onAction="#openButtonIsClicked" text="Open" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" onAction="#saveButtonIsClicked" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" onAction="#removeButtonIsClicked" text="Remove" GridPane.columnIndex="1" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addButtonIsClicked" text="Add" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openButtonIsClicked" text="Open" GridPane.rowIndex="1" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveButtonIsClicked" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#removeButtonIsClicked" text="Remove" GridPane.columnIndex="1" />
                     </children>
                 </GridPane>
             </children></AnchorPane>

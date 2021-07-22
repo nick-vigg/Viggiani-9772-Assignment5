@@ -28,11 +28,10 @@ public class List {
     public ArrayList<String> getIDs(){
         ArrayList<String> idList = new ArrayList<>();
         for (Item item : items){
-            if (!idList.contains(item)){
+            if (!idList.contains(item.getId())){
                 idList.add(item.getId());
             } else {
                 item.setId("ERROR Serial Number must be unique");
-                idList.add(item.getId());
             }
         }
         return idList;

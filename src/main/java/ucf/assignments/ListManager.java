@@ -43,6 +43,7 @@ public class ListManager {
         item.setId(idField.getText());
         item.setValue(valueField.getText());
         itemList.addItem(item);
+        itemList.getIDs();
         updateColumns();
         clearText();
     }
