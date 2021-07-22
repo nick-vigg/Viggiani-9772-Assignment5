@@ -1,5 +1,7 @@
 package ucf.assignments;
 
+import javafx.beans.property.StringProperty;
+
 import java.math.BigDecimal;
 
 public class Item {
@@ -7,7 +9,7 @@ public class Item {
     // String name; String id; BigDecimal value
     private String name;
     private String id;
-    private BigDecimal value;
+    private String value;
 
     //getter method for ID
     public String getId() {
@@ -22,18 +24,18 @@ public class Item {
         if (id.length() == 10){
             this.id = id;
         } else {
-            this.id = "ERROR, Serial Number must be formatted XXXXXXXXXX";
+            this.id = "ERROR, Must be formatted XXXXXXXXXX";
         }
         char idList[] = id.toCharArray();
         for (int i = 0; i < idList.length; i++){
             if (!Character.isLetterOrDigit(idList[i])){
-                this.id = "ERROR, Serial Number must only contain Num/Char";
+                this.id = "ERROR, Must only contain Num/Char";
             }
         }
     }
 
     //getter method for value
-    public BigDecimal getValue() {
+    public String getValue() {
         return value;
     }
 
@@ -41,7 +43,13 @@ public class Item {
     public void setValue(String value) {
         //use this.value = value to set value for instance of this item
         //convert from String to BigDecimal type
-        this.value = new BigDecimal(value);
+        this.value = value;
+        char valueList[] = value.toCharArray();
+        for (int i = 0; i < valueList.length; i++){
+            if (!Character.isDigit(valueList[i])){
+                this.value = "NonNumeric";
+            }
+        }
     }
 
     //getter method for name
@@ -56,8 +64,7 @@ public class Item {
         if(name.length() >= 2 && name.length() <= 256){
             this.name = name;
         } else {
-            this.name = "ERROR name must be between 2 and 256 characters inclusive";
+            this.name = "ERROR, Length must be between 2-256 inclusive";
         }
     }
-
 }
