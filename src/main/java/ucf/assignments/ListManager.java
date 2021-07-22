@@ -9,9 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class ListManager {
     private final List itemList = new List();
@@ -47,9 +44,27 @@ public class ListManager {
         item.setValue(valueField.getText());
         itemList.addItem(item);
         updateColumns();
+        clearText();
     }
 
     public void removeButtonIsClicked(ActionEvent actionEvent) {
+        try {
+            if (tableView.getSelectionModel().isEmpty()) {
+                itemList.removeItem(tableView.getSelectionModel().getSelectedIndex());
+
+            } else {
+                itemList.removeItem(tableView.getSelectionModel().getSelectedIndex());
+            }
+
+        } catch (IndexOutOfBoundsException e) {
+            Item item = new Item();
+            item.setName("ERROR, Select item to remove");
+            item.setId("ERROR, Select item to remove");
+            item.setValue("ERROR");
+            itemList.addItem(item);
+        }
+        updateColumns();
+        clearText();
     }
 
     public void searchButtonIsClicked(ActionEvent actionEvent) {
@@ -67,6 +82,12 @@ public class ListManager {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+    }
+
+    public void clearText(){
+        nameField.clear();
+        idField.clear();
+        valueField.clear();
     }
 
 }

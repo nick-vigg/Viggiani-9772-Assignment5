@@ -20,17 +20,9 @@ public class List {
         this.items.add(item);
     }
 
-    public void removeItem(Item item){
+    public void removeItem(int index){
         //removes item from list of items using remove method
-        this.items.remove(item);
-    }
-
-    public ArrayList<String> getNames(){
-        ArrayList<String> nameList = new ArrayList<>();
-        for (Item item : items) {
-            nameList.add(item.getName());
-        }
-        return nameList;
+        this.items.remove(index);
     }
 
     public ArrayList<String> getIDs(){
@@ -46,12 +38,5 @@ public class List {
         return idList;
     }
 
-    public ArrayList<String> getValues(){
-        ArrayList<String> valueList = new ArrayList<>();
-        for (Item item : items){
-            valueList.add(item.getValue());
-        }
-        return valueList;
-    }
 
 }
