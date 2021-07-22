@@ -16,7 +16,8 @@ public class App extends Application{
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ListManager.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(
+                    getClass().getClassLoader().getResource("ucf/assignments/ListManager.fxml")));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("List Manager");
@@ -26,6 +27,8 @@ public class App extends Application{
         }
 
     }
-    public static void main(String[] args) { Application.launch(args); }
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
 
 }
