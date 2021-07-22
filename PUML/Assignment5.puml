@@ -1,0 +1,37 @@
+@startuml
+
+class App{
+main()
+start()
+}
+
+class Item{
+name : String
+id : String
+value : BigDecimal
+
+setName()
+getName()
+setID()
+getID()
+setValue()
+getValue()
+}
+
+class List{
+items[] = ObservableList
+
+addItem()
+removeItem()
+sortItems()
+
+}
+
+class FileManager{
+}
+
+class ListManager{
+}
+
+
+@enduml
