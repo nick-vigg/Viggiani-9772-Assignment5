@@ -19,4 +19,8 @@ public class List {
         this.items.remove(item);
     }
 
+    public ObservableList<String> nameList(){
+
+    }
+
 }

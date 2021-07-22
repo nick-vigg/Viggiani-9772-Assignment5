@@ -34,7 +34,9 @@ public class ListManager {
 
     public void addButtonIsClicked(ActionEvent actionEvent) {
         Item item = new Item();
-        item.
+        item.setName(nameField.getText());
+        item.setId(idField.getText());
+        item.setValue(idField.getText());
     }
 
     public void removeButtonIsClicked(ActionEvent actionEvent) {
@@ -47,6 +49,10 @@ public class ListManager {
     }
 
     public void saveButtonIsClicked(ActionEvent actionEvent) {
+    }
+
+    public void updateColumns(){
+
     }
 
 }
