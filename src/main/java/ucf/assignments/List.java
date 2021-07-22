@@ -1,12 +1,10 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 5 Solution
+ *  Copyright 2021 Nicholas Viggiani
+ */
 package ucf.assignments;
 
-
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Set;
 
 public class List {
     private final ArrayList<Item> items = new ArrayList<>();
