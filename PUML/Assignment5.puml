@@ -9,6 +9,7 @@ class Item{
 name : String
 id : String
 value : BigDecimal
+idList : ArrayList<String>
 
 setName()
 getName()
@@ -16,22 +17,45 @@ setID()
 getID()
 setValue()
 getValue()
+validateUniqueID()
 }
 
 class List{
-items[] = ObservableList
+items[] : ObservableList
 
+getList()
 addItem()
 removeItem()
-sortItems()
-
+getIDs()
 }
 
 class FileManager{
 }
 
 class ListManager{
+itemList : List
+tableView : TableView<Item>
+priceColumn : TableColumn<Item, String>
+idColumn : TableColumn<Item, String>
+nameColumn : TableColumn<Item, String>
+nameField : TextField
+idField: TextField
+valueField : TextField
+searchField : TextField
+
+addButtonIsClicked(ActionEvent actionEvent)
+removeButtonIsClicked((ActionEvent actionEvent)
+searchButtonIsClicked(ActionEvent actionEvent)
+openButtonIsClicked(ActionEvent actionEvent)
+saveButtonIsClicked(ActionEvent actionEvent)
+updateColumns()
+clearText()
 }
 
+javafx.Application <|- App
+App *-- List
+List o-- Item
+ListManager - Item
+FileManager - ListManager
 
 @enduml

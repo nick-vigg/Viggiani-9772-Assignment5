@@ -54,18 +54,11 @@ public class ListManager {
 
     public void removeButtonIsClicked(ActionEvent actionEvent) {
         try {
-            if (tableView.getSelectionModel().isEmpty()) {
-                itemList.removeItem(tableView.getSelectionModel().getSelectedIndex());
-
-            } else {
-                itemList.removeItem(tableView.getSelectionModel().getSelectedIndex());
-            }
+            itemList.removeItem(tableView.getSelectionModel().getSelectedIndex());
 
         } catch (IndexOutOfBoundsException e) {
             Item item = new Item();
             item.setName("ERROR, Select item to remove");
-            item.setId("ERROR, Select item to remove");
-            item.setValue("ERROR");
             itemList.addItem(item);
         }
         updateColumns();
@@ -82,6 +75,7 @@ public class ListManager {
     }
 
     public void updateColumns(){
+        //Set all column values using CellFactory
         ObservableList<Item> list = FXCollections.observableArrayList(itemList.getList());
         tableView.setItems(list);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -90,6 +84,7 @@ public class ListManager {
     }
 
     public void clearText(){
+        //Set all textFields to blank using clear method
         nameField.clear();
         idField.clear();
         valueField.clear();

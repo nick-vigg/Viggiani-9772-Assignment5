@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class List {
     private final ArrayList<Item> items = new ArrayList<>();
 
+    //getter method for list of items
     public ArrayList<Item> getList(){
         return items;
     }
@@ -24,6 +25,9 @@ public class List {
     }
 
     public ArrayList<String> getIDs(){
+        //create a list of IDs of each item
+        //if the ID is already in the list of IDs then
+        //ERROR, the ID must be unique
         ArrayList<String> idList = new ArrayList<>();
         for (Item item : items){
             if (!idList.contains(item.getId())){
