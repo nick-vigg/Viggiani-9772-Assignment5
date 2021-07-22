@@ -42,6 +42,9 @@ public class ListManager {
     private TextField searchField;
 
     public void addButtonIsClicked(ActionEvent actionEvent) {
+        //Create a new item and set its attributes
+        //add the item to the list of items and validate it's ID
+        //Update the TableView and clear existing data
         Item item = new Item();
         item.setName(nameField.getText());
         item.setId(idField.getText());
@@ -53,6 +56,9 @@ public class ListManager {
     }
 
     public void removeButtonIsClicked(ActionEvent actionEvent) {
+        //Remove an existing item from the list if selected
+        //If no item is selected ERROR
+        //Update the TableView and clear exisitng data
         try {
             itemList.removeItem(tableView.getSelectionModel().getSelectedIndex());
 
