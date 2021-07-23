@@ -30,6 +30,10 @@ getIDs()
 }
 
 class FileManager{
+promptSaveFile()
+promptOpenFile()
+writeToFile()
+readFromFile()
 }
 
 class ListManager{
@@ -48,7 +52,9 @@ removeButtonIsClicked((ActionEvent actionEvent)
 searchButtonIsClicked(ActionEvent actionEvent)
 openButtonIsClicked(ActionEvent actionEvent)
 saveButtonIsClicked(ActionEvent actionEvent)
+updateButtonIsClicked(ActionEvent actionEvent)
 updateColumns()
+update()
 clearText()
 }
 
