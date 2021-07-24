@@ -4,6 +4,7 @@
  */
 package ucf.assignments;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Item {
@@ -88,6 +89,13 @@ public class Item {
             }
         }
         return this.id;
+    }
+
+    public void TXTfileToItem(ArrayList<String> list, int i){
+        String[] splitArray = list.get(i).split("\\|");
+        setValue(splitArray[0].trim());
+        setId(splitArray[1].trim());
+        setName(splitArray[2].trim());
     }
 
 }

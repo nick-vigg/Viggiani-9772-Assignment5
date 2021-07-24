@@ -14,6 +14,14 @@ public class List {
         return items;
     }
 
+    public int getSize(){
+        return items.size();
+    }
+
+    public Item getItem(int integer){
+        return items.get(integer);
+    }
+
     public void addItem(Item item){
         //adds item to list of items using add method
         this.items.add(item);

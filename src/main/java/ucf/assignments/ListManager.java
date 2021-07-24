@@ -16,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import java.util.ArrayList;
+
 
 public class ListManager {
     private final List itemList = new List();
@@ -84,9 +86,26 @@ public class ListManager {
     }
 
     public void openButtonIsClicked(ActionEvent actionEvent) {
+        //allows for user input to be loaded from a file
+        //Filters the openable files to only .txt files;
+        String path = FileManager.promptOpenFile();
+        ArrayList<String> fileList = FileManager.readFromFile(path);
+        if (!path.equals("")) {
+            for (int i = 0; i < fileList.size(); i++) {
+                Item item = new Item();
+                item.TXTfileToItem(fileList, i);
+                itemList.addItem(item);
+            }
+        }
+        itemList.getIDs();
+        updateColumns();
     }
 
     public void saveButtonIsClicked(ActionEvent actionEvent) {
+        String path = FileManager.promptSaveFile();
+        if (!path.equals("")) {
+            FileManager.writeToFile(path, itemList);
+        }
     }
 
     public void updateColumns() {
