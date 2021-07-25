@@ -17,9 +17,9 @@ public class FileManager {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter txtFilter =
                 new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
-        FileChooser.ExtensionFilter htmlFilter =
-                new FileChooser.ExtensionFilter("HTML files (*.html)", "*.html");
-        fileChooser.getExtensionFilters().addAll(txtFilter, htmlFilter);
+        //FileChooser.ExtensionFilter htmlFilter =
+          //      new FileChooser.ExtensionFilter("HTML files (*.html)", "*.html");
+        fileChooser.getExtensionFilters().addAll(txtFilter);
         fileChooser.setTitle("Open Resource File");
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
@@ -36,6 +36,8 @@ public class FileManager {
                 new FileChooser.ExtensionFilter("TEXT files (*.txt)", "*.txt");
         FileChooser.ExtensionFilter htmlFilter =
                 new FileChooser.ExtensionFilter("HTML files (*.html)", "*.html");
+       // FileChooser.ExtensionFilter jsonFilter =
+         //       new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
         fileChooser.getExtensionFilters().addAll(txtFilter, htmlFilter);
         fileChooser.setTitle("Save File");
         File file = fileChooser.showSaveDialog(null);
@@ -69,7 +71,7 @@ public class FileManager {
                 PrintWriter pw = new PrintWriter((new FileWriter(path)));
                 pw.println("<table border = 1><tr><th>Value($)<th>Serial Number<th>Name");
                 for (int i = 0; i < list.getSize(); i++) {
-                    pw.println(String.format("<tr><th>%s<th>%s<th>%s",
+                    pw.println(String.format("<tr><td>%s<td>%s<td>%s",
                             list.getItem(i).getValue(),
                             list.getItem(i).getId(),
                             list.getItem(i).getName()));
@@ -85,7 +87,6 @@ public class FileManager {
     public static ArrayList<String> readFromFile(String path) {
         //Data read from .txt file in lines of data
         ArrayList<String> ret = new ArrayList<>();
-        if (path.contains(".txt")) {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(path));
                 br.readLine();
@@ -98,25 +99,6 @@ public class FileManager {
             } catch (IOException e) {
                 return new ArrayList<>();
             }
-        } else if (path.contains(".html")) {
-            return readFromHTML(path);
-        }
-        return ret;
-    }
-
-    public static ArrayList<String> readFromHTML(String path) {
-        ArrayList<String> ret = new ArrayList<>();
-        org.jsoup.nodes.Document doc = Jsoup.parse(path);
-        org.jsoup.select.Elements rows = doc.select("tr");
-        for(org.jsoup.nodes.Element row :rows)
-        {
-            org.jsoup.select.Elements columns = row.select("td");
-            for (org.jsoup.nodes.Element column:columns)
-            {
-                ret.add(column.text());
-            }
-            ret.add(row.text());
-        }
         return ret;
     }
 }

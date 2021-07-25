@@ -4,7 +4,6 @@
  */
 package ucf.assignments;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Item {
@@ -30,7 +29,7 @@ public class Item {
         } else {
             this.id = "ERROR, Must be formatted XXXXXXXXXX";
         }
-        char idCharList[] = id.toCharArray();
+        char[] idCharList = id.toCharArray();
         for (int i = 0; i < idCharList.length; i++) {
             if (!Character.isLetterOrDigit(idCharList[i])) {
                 this.id = "ERROR, Must only contain Num/Char";
@@ -54,7 +53,7 @@ public class Item {
         if (value.equals("")){
             this.value = "Blank";
         }
-        char valueList[] = value.toCharArray();
+        char[] valueList = value.toCharArray();
         for (int i = 0; i < valueList.length; i++) {
             if (!Character.isDigit(valueList[i])) {
                 this.value = "NonNumeric";
@@ -78,7 +77,7 @@ public class Item {
         }
     }
 
-    public String validateUniqueID(String id) {
+    public void validateUniqueID(String id) {
         //use list of IDs to ensure they do not repeat
         //if ID is listed more than once, ERROR
         for (String str : idList) {
@@ -88,21 +87,13 @@ public class Item {
                 this.id = "ERROR Serial Number must be unique";
             }
         }
-        return this.id;
     }
 
     public void TXTfileToItem(ArrayList<String> list, int i){
+        //creates an item from data in txt file
         String[] splitArray = list.get(i).split("\\|");
         setValue(splitArray[0].trim());
         setId(splitArray[1].trim());
         setName(splitArray[2].trim());
     }
-
-    public void HTMLfileToItem(ArrayList<String> list, int i){
-        String[] splitArray = list.get(i).split("<th>");
-        setValue(splitArray[0].trim());
-        setId(splitArray[1].trim());
-        setName(splitArray[2].trim());
-    }
-
 }

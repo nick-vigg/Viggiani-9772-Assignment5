@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-
-import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
-import java.util.Locale;
 
 
 public class ListManager {
@@ -51,6 +48,7 @@ public class ListManager {
 
     @FXML
     public void initialize() {
+        //set the values within the comboBox
         comboBox.setValue("Name");
         comboBox.setItems(choiceBoxValues);
         FilteredList<Item> filteredList =
@@ -106,20 +104,14 @@ public class ListManager {
                     itemList.addItem(item);
                 }
             }
-            else if (path.contains(".html")) {
-                ArrayList<String> fileList = FileManager.readFromHTML(path);
-                for (int i = 0; i < fileList.size(); i++){
-                    Item item = new Item();
-                    item.HTMLfileToItem(fileList, i);
-                    itemList.addItem(item);
-                }
-            }
         }
         itemList.getIDs();
         updateColumns(itemList.getList());
     }
 
     public void saveButtonIsClicked(ActionEvent actionEvent) {
+        //prompts user to a save box dialogue where they must input
+        // a filename in order to save
         String path = FileManager.promptSaveFile();
         if (!path.equals("")) {
             FileManager.writeToFile(path, itemList);
@@ -159,6 +151,10 @@ public class ListManager {
     }
 
     public void searchButtonIsClicked(ActionEvent actionEvent) {
+        //Takes String from searchField and then filters through
+        //existing items in table based on comboBox value selected
+        //Adds filtered items to new list which displays the search results
+        //if the searchField is empty, the original table is restored
         String key = searchField.getText().toLowerCase();
         ArrayList<Item> filterList = new ArrayList<>();
         if (comboBox.getValue().equals("Name")) {

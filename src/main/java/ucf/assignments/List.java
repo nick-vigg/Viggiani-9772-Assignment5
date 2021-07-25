@@ -14,10 +14,12 @@ public class List {
         return items;
     }
 
+    //getter method for size of list
     public int getSize(){
         return items.size();
     }
 
+    //getter method for item in list
     public Item getItem(int integer){
         return items.get(integer);
     }
