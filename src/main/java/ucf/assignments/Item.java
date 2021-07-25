@@ -98,4 +98,11 @@ public class Item {
         setName(splitArray[2].trim());
     }
 
+    public void HTMLfileToItem(ArrayList<String> list, int i){
+        String[] splitArray = list.get(i).split("<th>");
+        setValue(splitArray[0].trim());
+        setId(splitArray[1].trim());
+        setName(splitArray[2].trim());
+    }
+
 }

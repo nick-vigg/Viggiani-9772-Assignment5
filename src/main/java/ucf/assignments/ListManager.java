@@ -6,21 +6,21 @@ package ucf.assignments;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class ListManager {
     private final List itemList = new List();
+    ObservableList<String> choiceBoxValues = FXCollections.observableArrayList("Name", "Serial Number");
 
     @FXML
     private TableView<Item> tableView;
@@ -46,18 +46,29 @@ public class ListManager {
     @FXML
     private TextField searchField;
 
+    @FXML
+    private ComboBox comboBox;
+
+    @FXML
+    public void initialize() {
+        comboBox.setValue("Name");
+        comboBox.setItems(choiceBoxValues);
+        FilteredList<Item> filteredList =
+                new FilteredList<Item>(FXCollections.observableArrayList(itemList.getList()));
+    }
+
     public void addButtonIsClicked(ActionEvent actionEvent) {
         //Create a new item and set its attributes
         //add the item to the list of items and validate it's ID
         //Update the TableView and clear existing data
-            Item item = new Item();
-            item.setName(nameField.getText());
-            item.setId(idField.getText());
-            item.setValue(valueField.getText());
-            itemList.addItem(item);
-            itemList.getIDs();
-            updateColumns();
-            clearText();
+        Item item = new Item();
+        item.setName(nameField.getText());
+        item.setId(idField.getText());
+        item.setValue(valueField.getText());
+        itemList.addItem(item);
+        itemList.getIDs();
+        updateColumns(itemList.getList());
+        clearText();
     }
 
     public void removeButtonIsClicked(ActionEvent actionEvent) {
@@ -72,33 +83,40 @@ public class ListManager {
             item.setName("ERROR, Select item to remove");
             itemList.addItem(item);
         }
-        updateColumns();
+        updateColumns(itemList.getList());
         clearText();
     }
 
     public void updateButtonIsClicked(ActionEvent actionEvent) {
         //Update the table after editing values
         itemList.getIDs();
-        updateColumns();
-    }
-
-    public void searchButtonIsClicked(ActionEvent actionEvent) {
+        updateColumns(itemList.getList());
     }
 
     public void openButtonIsClicked(ActionEvent actionEvent) {
         //allows for user input to be loaded from a file
         //Filters the openable files to only .txt files;
         String path = FileManager.promptOpenFile();
-        ArrayList<String> fileList = FileManager.readFromFile(path);
         if (!path.equals("")) {
-            for (int i = 0; i < fileList.size(); i++) {
-                Item item = new Item();
-                item.TXTfileToItem(fileList, i);
-                itemList.addItem(item);
+            if (path.contains(".txt")) {
+                ArrayList<String> fileList = FileManager.readFromFile(path);
+                for (int i = 0; i < fileList.size(); i++) {
+                    Item item = new Item();
+                    item.TXTfileToItem(fileList, i);
+                    itemList.addItem(item);
+                }
+            }
+            else if (path.contains(".html")) {
+                ArrayList<String> fileList = FileManager.readFromHTML(path);
+                for (int i = 0; i < fileList.size(); i++){
+                    Item item = new Item();
+                    item.HTMLfileToItem(fileList, i);
+                    itemList.addItem(item);
+                }
             }
         }
         itemList.getIDs();
-        updateColumns();
+        updateColumns(itemList.getList());
     }
 
     public void saveButtonIsClicked(ActionEvent actionEvent) {
@@ -108,9 +126,9 @@ public class ListManager {
         }
     }
 
-    public void updateColumns() {
+    public void updateColumns(ArrayList<Item> items) {
         //Set all column values using CellFactory and set them to be editable
-        ObservableList<Item> list = FXCollections.observableArrayList(itemList.getList());
+        ObservableList<Item> list = FXCollections.observableArrayList(items);
         tableView.setItems(list);
         tableView.setEditable(true);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -122,7 +140,7 @@ public class ListManager {
         update();
     }
 
-    public void update(){
+    public void update() {
         // Update the selected value with the new value in the text box
         idColumn.setOnEditCommit(t ->
                 t.getRowValue().setId(t.getNewValue()));
@@ -140,6 +158,26 @@ public class ListManager {
         valueField.clear();
     }
 
-
+    public void searchButtonIsClicked(ActionEvent actionEvent) {
+        String key = searchField.getText().toLowerCase();
+        ArrayList<Item> filterList = new ArrayList<>();
+        if (comboBox.getValue().equals("Name")) {
+            for (int i = 0; i < itemList.getSize(); i++) {
+                if (itemList.getItem(i).getName().contains(key)) {
+                    filterList.add(itemList.getItem(i));
+                }
+            }
+        } else if (comboBox.getValue().equals("Serial Number")) {
+            for (int i = 0; i < itemList.getSize(); i++) {
+                if (itemList.getItem(i).getId().contains(key)) {
+                    filterList.add(itemList.getItem(i));
+                }
+            }
+        }
+        updateColumns(filterList);
+        if (key.equals("")){
+            updateColumns(itemList.getList());
+        }
+    }
 }
 
