@@ -1,6 +1,6 @@
 Program to store and edit an inventory.
 TableView will display all contents of each item in an inventory.
-Items can be uploaded from a .txt file and saved to an .html table or .txt file.
+Items can be uploaded from a .txt file and saved to an .html table, .txt file, or .json file.
 Items can be added to the list through filling in required fields and pressing add button.
 ERROR will replace field where error occurs if data is input improperly in fields.
 Remove button will remove selected item from a list.
