@@ -8,3 +8,4 @@ Table is editable through double-click, user must press update button after maki
 User is able to search through table based on Name or Serial Number.
 User can select the manner they wish to search through the table with drop-down menu.
 User can type their desired search string into search box and press search button in order to search the desired field.
+User can get their original list by searching with an empty search bar. 
